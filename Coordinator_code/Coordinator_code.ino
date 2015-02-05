@@ -1,34 +1,43 @@
+#include <SoftwareSerial.h>
 int ledPin = 13; 
 int state = 0;
-String data; 
+String data = ""; 
 SoftwareSerial portTwo(8,9);
-int[] team;
 boolean check=true;
- 
+String command = "";
+char assembler[20];
+
 void setup() {
  Serial.begin(9600); // Default connection rate for my BT module
  portTwo.begin(9600);
- Serial.write(+++);
+ Serial.write("+++");
  while(check) {
-   data=Serial.read();
+   if(Serial.available()>0){
+   char[ = Serial.read();
+   }
    if(data=="OK") {
      check=false;
    }
  }
- Serial.write(ATID4567);
- Serial.write(ATCH0x0D);
- Serial.write(ATMY0);
- Serial.write(CN);
- 
+ Serial.write("ATID4567");
+ delay(50);
+ Serial.write("ATCH0x0D");
+ delay(50);
+ Serial.write("ATMY0");
+ delay(50);
+ Serial.write("CN");
+ delay(1000);
 }
  
 void loop() {
-
+ Serial.listen();
  if(Serial.available() > 0){
- data = Serial.read();
+   data = Serial.read();
  }
- PortTwo.write(data)
-
- }
+ portTwo.write(data)
+ portTwo.listen();
+ if(portTwo.available() > 0){
+   command = portTwo.read();
  }
 }
+
