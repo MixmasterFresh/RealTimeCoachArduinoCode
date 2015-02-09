@@ -6,6 +6,8 @@ SoftwareSerial portTwo(8,9);
 boolean check=true;
 String command = "";
 char assembler[20];
+int counter=0;
+
 
 void setup() {
  Serial.begin(9600); // Default connection rate for my BT module
@@ -31,9 +33,11 @@ void setup() {
  
 void loop() {
  Serial.listen();
- if(Serial.available() > 0){
-   data = Serial.read();
- }
+ while(
+   if(Serial.available() > 0){
+     data = Serial.read();
+   }
+ while() {
  portTwo.write(data)
  portTwo.listen();
  if(portTwo.available() > 0){
