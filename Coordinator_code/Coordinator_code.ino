@@ -51,7 +51,6 @@ void loop() {
         counter++;
         }
     }
-    counter--;
     while(counter>=0) {
         portTwo.write(assembler[counter]);
         counter--;
@@ -64,19 +63,18 @@ void loop() {
         command = portTwo.read();
     }
     if(command=='a') {
-        Serial.write('g');
+        Serial.write('a');
         breaker=time;
         while(time-breaker<1000) {
             if(portTwo.available() > 0) {
                 addresses[counter]= Serial.read();
                 counter++;
             }
-            
         }
         counter--;
         while(counter>=0) {
-        portTwo.write(assembler[counter]);
-        counter--;
-    }
+            portTwo.write(assembler[counter]);
+            counter--;
+        }
     }
 }
