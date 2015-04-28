@@ -8,9 +8,11 @@ boolean check=true;
 char command = 'a';
 char assembler[50];
 int counter=0;
+byte message;
 int addresses[50];
 unsigned long time;   
 unsigned long breaker; 
+int stop = -1;
 
 void setup() {
     portOne.begin(9600);
@@ -22,15 +24,18 @@ void loop() {
     check = true;
     while(check) {
         if(portTwo.available() > 0) {
-            portOne.write(portTwo.read());
+            message =portTwo.read();
+            portOne.write(message);
+            portOne.write('?');
             check = false;
         }
     }  
     portOne.listen();
     state=0;
-    while(state<40) {
+    while(state<20) {
         if(portOne.available() > 0) {
-            portTwo.write(portOne.read());
+            message = portOne.read();
+            portTwo.write(message);
             state++;
         }
     }
