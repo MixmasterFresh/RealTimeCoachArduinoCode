@@ -26,7 +26,7 @@ void loop() {
         if(portTwo.available() > 0) {
             message =portTwo.read();
             portOne.write(message);
-            portOne.write('?');
+            portOne.write('-1');
             check = false;
         }
     }  
